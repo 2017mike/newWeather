@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="fiveDay"></div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"></script>
+  <script>
+
+
+
+
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=irvine&units=imperial&appid=bbe4af36dc9547a2b3a9b770deb43af4`)
+    .then(res=> {
+      // console.log(res.data)
+      let lat = res.data.city.coord.lat
+      let lon = res.data.city.coord.lon
+
+      // console.log(lat, lon)
+
+      axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=bbe4af36dc9547a2b3a9b770deb43af4`)
+      .then(res2=> {
+        let newArray = []
+        console.log(res2.data)
+        console.log(res2.data.daily)
+
+        res2.data.daily.forEach(day=> {
+          document.getElementById("fiveDay").innerHTML += `
+          
+          maxTemp: ${day.temp.max}
+          minTemp: ${day.temp.min}
+          `
+        })
+      })
+    })
+
+
+
+
+  </script>
+  
+</body>
+</html>
