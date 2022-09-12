@@ -7,45 +7,31 @@
   <title>Document</title>
 </head>
 <body>
+  
 
-  <div id="fiveDay"></div>
-
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"></script>
-  <script>
-
-
-
-
-    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=irvine&units=imperial&appid=bbe4af36dc9547a2b3a9b770deb43af4`)
-    .then(res=> {
-      // console.log(res.data)
-      let lat = res.data.city.coord.lat
-      let lon = res.data.city.coord.lon
-
-      // console.log(lat, lon)
-
-      axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=bbe4af36dc9547a2b3a9b770deb43af4`)
-      .then(res2=> {
-        let newArray = []
-        console.log(res2.data)
-        console.log(res2.data.daily)
-
-        res2.data.daily.forEach(day=> {
-          document.getElementById("fiveDay").innerHTML += `
-          
-          maxTemp: ${day.temp.max}
-          minTemp: ${day.temp.min}
-          `
-        })
-      })
-    })
+  <form>
+    <p>
+    
+      <input type="text" name="item" id="city">
+    </p>
+    <button id="searchBtn">Search!</button>
+  </form>
 
 
+
+
+
+
+  <script>  
+
+ document.getElementById('searchBtn').addEventListener('click', event => {
+   event.preventDefault()
+    window.location = './search.html'
+  })
 
 
   </script>
-  
+
+
 </body>
 </html>
